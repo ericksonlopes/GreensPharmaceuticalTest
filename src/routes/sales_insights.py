@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from config.database import DATABASE_URL
+from src.config.database import DATABASE_URL
 from src.agents.generate_sales_insights_agent import GenerateSalesInsightsAgent
 
 router = APIRouter()

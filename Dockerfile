@@ -1,9 +1,12 @@
-FROM python:3.10
+FROM python:3.10-slim
 
 WORKDIR /greens
+
 COPY . .
 
-RUN pip install uv
-RUN uv sync
+RUN pip install pipenv
+RUN pipenv install --system
 
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]
+EXPOSE 8000
+
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

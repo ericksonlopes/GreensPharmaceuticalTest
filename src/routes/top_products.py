@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from repository.get_top_products_repository import get_top_products_internal
-from ..config.database import get_db
+from src.config.database import get_db
+from src.repository.get_top_products_repository import get_top_products_internal
 
 router = APIRouter()
 

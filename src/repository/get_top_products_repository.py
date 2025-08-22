@@ -1,7 +1,7 @@
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
-from models.sales import Sale
+from src.models.sales import Sale
 
 
 async def get_top_products_internal(limit: int, db: Session):
@@ -11,4 +11,4 @@ async def get_top_products_internal(limit: int, db: Session):
         .order_by(func.count(Sale.name).desc()) \
         .limit(limit) \
         .all()
-    return [{"name": name, "total_sales": total_sales} for name, total_sales in top_products]
+    return top_products
