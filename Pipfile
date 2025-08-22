@@ -10,6 +10,8 @@ langchain = {extras = ["openai"], version = "*"}
 mysql-connector-python = "*"
 python-dotenv = "*"
 uvicorn = "*"
+faker = "*"
+pydantic-settings = "*"
 
 [dev-packages]
 

@@ -3,7 +3,7 @@ import random
 
 from dotenv import load_dotenv
 from faker import Faker
-from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from src.models.sales import Base, Sale
@@ -12,29 +12,17 @@ from src.models.sales import Base, Sale
 load_dotenv()
 
 # Configurações do banco de dados
-MYSQL_ROOT_PASSWORD = os.getenv("MYSQL_ROOT_PASSWORD", "root_password")
-MYSQL_DATABASE = os.getenv("MYSQL_DATABASE", "my_database")
-MYSQL_USER = os.getenv("MYSQL_USER", "root")
+MYSQL_ROOT_PASSWORD = os.getenv("MYSQL_ROOT_PASSWORD")
+MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
+MYSQL_USER = os.getenv("MYSQL_USER")
+MYSQL_HOST = os.getenv("MYSQL_HOST")
+
 # O host aqui deve ser o nome do serviço do MySQL no docker-compose.yml
-DATABASE_URL = f"mysql+mysqlconnector://{MYSQL_USER}:{MYSQL_ROOT_PASSWORD}@db:3306/{MYSQL_DATABASE}"
+DATABASE_URL = f"mysql+mysqlconnector://{MYSQL_USER}:{MYSQL_ROOT_PASSWORD}@{MYSQL_HOST}:3306/{MYSQL_DATABASE}"
 
 # Inicializar Faker
 faker = Faker('pt_BR')
 
-# Base declarativa para os modelos
-# Base = declarative_base()
-
-# Definir o modelo da tabela Sales
-# class Sale(Base):
-#     __tablename__ = 'sales'
-
-#     id = Column(Integer, primary_key=True, autoincrement=True)
-#     name = Column(String(255), nullable=False)
-#     price = Column(Float, nullable=False)
-#     date = Column(DateTime, nullable=False)
-
-#     def __repr__(self):
-#         return f"<Sale(name='{self.name}', price={self.price}, date='{self.date}')>"
 
 # Função para gerar dados fictícios de vendas de farmácia
 def generate_fake_pharmacy_sales(num_records=100):
@@ -57,11 +45,11 @@ def generate_fake_pharmacy_sales(num_records=100):
         sales_data.append({'name': name, 'price': price, 'date': date})
     return sales_data
 
+
 if __name__ == "__main__":
     print("Conectando ao banco de dados...")
     engine = create_engine(DATABASE_URL)
 
-    # Criar a tabela se ela não existir
     Base.metadata.create_all(engine)
     print("Tabela 'sales' verificada/criada.")
 

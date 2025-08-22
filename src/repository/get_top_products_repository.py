@@ -11,4 +11,4 @@ async def get_top_products_internal(limit: int, db: Session):
         .order_by(func.count(Sale.name).desc()) \
         .limit(limit) \
         .all()
-    return top_products
+    return [{"name": name, "total_sales": total_sales} for name, total_sales in top_products]

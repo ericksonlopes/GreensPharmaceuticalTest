@@ -5,12 +5,15 @@ from langchain_community.utilities.sql_database import SQLDatabase
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 
+from src.config.settings import settings
+
 
 class GenerateSalesInsightsAgent:
     def __init__(self, database_url: str):
         self.model = ChatOpenAI(
             model="gpt-4o",
-            temperature=0.3
+            temperature=0.3,
+            api_key=settings.OPENAI_API_KEY
         )
         self.db = SQLDatabase.from_uri(database_url)
         self.toolkit = SQLDatabaseToolkit(
@@ -34,13 +37,15 @@ class GenerateSalesInsightsAgent:
 
         self.prompt_template = PromptTemplate.from_template(
             """
-    Use as ferramentas necessarias para responder.
-    perguntas relacionadas ao sobre vendas de farmácia.
-    Perguntas: {q}
-    
-    Você esta conectado em um banco mysql com dados de vendas de farmácia.
-    Responda em pt-br, e seja o mais claro e objetivo possível.
-    Se não souber a resposta, diga que não sabe.
+    Como um assistente de vendas de farmácia, sua tarefa é responder a perguntas sobre vendas, produtos e tendências de mercado.
+    Utilize as ferramentas disponíveis para criar queries que respondam às perguntas de forma eficaz.
+
+    Instruções:
+    - Responda em português (Brasil).
+    - Seja claro, objetivo e conciso.
+    - Se a informação não estiver disponível, indique que não sabe a resposta.
+
+    Pergunta do Usuário: {q}
     """
         )
 
