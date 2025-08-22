@@ -8,7 +8,7 @@ from src.repository.get_top_products_repository import get_top_products_internal
 router = APIRouter()
 
 
-@router.get("/top-products", summary="Obter os produtos mais vendidos")
+@router.get("/top-products", summary="Obter os 5 produtos mais vendidos")
 async def get_top_products(limit: int = 5, db: Session = Depends(get_db)):
     """Retorna uma lista dos produtos mais vendidos, baseada na contagem de vendas."""
     logger.info(f"Endpoint /top-products acessado. Limite: {limit}")

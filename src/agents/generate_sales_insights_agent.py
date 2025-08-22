@@ -1,3 +1,4 @@
+from Tools.scripts.cleanfuture import verbose
 from langchain import hub
 from langchain.agents import create_react_agent, AgentExecutor
 from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
@@ -31,7 +32,7 @@ class GenerateSalesInsightsAgent:
         self.agent_executor = AgentExecutor(
             agent=self.agent,
             tools=self.toolkit.get_tools(),
-            verbose=True,
+            verbose=False,
             handle_parsing_errors=True
         )
 
