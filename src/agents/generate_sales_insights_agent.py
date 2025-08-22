@@ -1,4 +1,3 @@
-from Tools.scripts.cleanfuture import verbose
 from langchain import hub
 from langchain.agents import create_react_agent, AgentExecutor
 from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
