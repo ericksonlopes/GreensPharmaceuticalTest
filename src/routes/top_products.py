@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 @router.get("/top-products", summary="Obter os produtos mais vendidos")
-async def get_top_products(limit: int = 10, db: Session = Depends(get_db)):
+async def get_top_products(limit: int = 5, db: Session = Depends(get_db)):
     """Retorna uma lista dos produtos mais vendidos, baseada na contagem de vendas."""
     logger.info(f"Endpoint /top-products acessado. Limite: {limit}")
     try:

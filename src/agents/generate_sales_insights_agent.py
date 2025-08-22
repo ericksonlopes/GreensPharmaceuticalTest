@@ -13,7 +13,6 @@ class GenerateSalesInsightsAgent:
         logger.info("Inicializando GenerateSalesInsightsAgent...")
         self.model = ChatOpenAI(
             model="gpt-4o",
-            temperature=0.3,
             api_key=settings.OPENAI_API_KEY
         )
         self.db = SQLDatabase.from_uri(database_url)
@@ -39,12 +38,14 @@ class GenerateSalesInsightsAgent:
         self.prompt_template = PromptTemplate.from_template(
             """
     Como um assistente de vendas de farmácia, sua tarefa é responder a perguntas sobre vendas, produtos e tendências de mercado.
-    Utilize as ferramentas disponíveis para criar queries que respondam às perguntas de forma eficaz.
+    Você tem acesso a ferramentas de banco de dados SQL. Use essas ferramentas para consultar as tabelas disponíveis (especialmente 'sales')
+    e extrair as informações necessárias para responder às perguntas.
+    Por exemplo, para "Quais são os itens que mais venderam?", você deve construir uma query SQL para agregar e ordenar os dados da tabela 'sales'.
 
     Instruções:
     - Responda em português (Brasil).
     - Seja claro, objetivo e conciso.
-    - Se a informação não estiver disponível, indique que não sabe a resposta.
+    - Se a informação não estiver disponível após a consulta às ferramentas, indique que não sabe a resposta.
 
     Pergunta do Usuário: {q}
     """
