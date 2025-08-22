@@ -7,6 +7,20 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+    networks:
+      - app_network
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file: .env
+    networks:
+      - app_network
 
 volumes:
   db_data:
+
+networks:
+  app_network:
+    driver: bridge
