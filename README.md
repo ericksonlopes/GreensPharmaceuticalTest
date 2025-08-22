@@ -21,13 +21,13 @@ Para configurar o ambiente de desenvolvimento, siga os passos abaixo:
 
 ## Uso
 
-A API esará disponível em `http://localhost:8000/` (ou na porta configurada nas variáveis de ambiente).
+A API esará disponível em `http://localhost:8000/`
 
 Você pode acessar a documentação interativa da API (Swagger UI) em `http://localhost:8000/docs` para explorar os endpoints e testar as requisições.
 
 ### Endpoints da API
 
-- `/top_products`: Retorna os produtos mais vendidos.
+- `/top_products`: Retorna os 5 produtos mais vendidos.
 - `/sales_insights`: Gera insights sobre as vendas utilizando um agente de IA.
 
 ## Estrutura do Projeto
