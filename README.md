@@ -11,7 +11,7 @@ Para configurar o ambiente de desenvolvimento, siga os passos abaixo:
    cd GreensPharmaceuticalTest
    ```
 
-2. Certifique-se de que configurou o arquivo `.env` utilize o arquivo `.env.example` como modelo. Este arquivo deve conter as variáveis de ambiente necessárias para a aplicação, como as credenciais do banco de dados e outras configurações.
+2. Crie umarquivo `.env`. Você pode utilizar o arquivo `.env.example` como modelo. Este arquivo deve conter as variáveis de ambiente necessárias para a aplicação, como as credenciais do banco de dados e outras configurações.
 
 
 3. Inicie os serviços do Docker Compose (que inclui o banco de dados):
