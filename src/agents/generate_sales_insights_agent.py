@@ -5,11 +5,12 @@ from langchain_community.utilities.sql_database import SQLDatabase
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 
-from src.config.settings import settings
+from src.config.settings import settings, logger
 
 
 class GenerateSalesInsightsAgent:
     def __init__(self, database_url: str):
+        logger.info("Inicializando GenerateSalesInsightsAgent...")
         self.model = ChatOpenAI(
             model="gpt-4o",
             temperature=0.3,
@@ -50,7 +51,13 @@ class GenerateSalesInsightsAgent:
         )
 
     def invoke(self, question: str):
-        output = self.agent_executor.invoke(
-            {"input": self.prompt_template.format(q=question)}
-        )
-        return output.get("output")
+        logger.info(f"Invocando agente de insights de vendas para a pergunta: {question}")
+        try:
+            output = self.agent_executor.invoke(
+                {"input": self.prompt_template.format(q=question)}
+            )
+            logger.info("Agente de insights de vendas executado com sucesso.")
+            return output.get("output")
+        except Exception as e:
+            logger.error(f"Erro ao invocar agente de insights de vendas: {e}")
+            raise

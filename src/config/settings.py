@@ -1,3 +1,4 @@
+from loguru import logger
 from pydantic_settings import BaseSettings
 
 
@@ -17,3 +18,6 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+logger.add("file.log", rotation="500 MB", level="INFO")
+logger.add(lambda msg: print(msg), level="DEBUG")

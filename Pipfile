@@ -4,12 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+jupyter = "*"
+loguru = "*"
+fastapi = {extras = ["all"], version = "*"}
+uvicorn = {extras = ["standard"], version = "*"}
+psycopg2-binary = "*"
+alembic = "*"
+sqlalchemy = "*"
+python-dotenv = "*"
 langchain-community = "*"
-fastapi = "*"
 langchain = {extras = ["openai"], version = "*"}
 mysql-connector-python = "*"
-python-dotenv = "*"
-uvicorn = "*"
 faker = "*"
 pydantic-settings = "*"
 
